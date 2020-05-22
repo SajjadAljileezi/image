@@ -22,3 +22,4 @@ Route::get('/image', 'ImagesController@index');
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::post('/routing', 'ImagesController@routing');

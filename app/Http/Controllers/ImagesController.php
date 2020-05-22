@@ -37,8 +37,23 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       dd($request->media);
     }
+
+
+// Routing
+public function routing(Request $request)
+{
+$media= $request->media;
+
+if ($media =="Printing"){
+  return view('printing');
+
+}
+else{
+    return back();
+}}
+
 
     /**
      * Display the specified resource.

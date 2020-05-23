@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Image;
 use App\images;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ImagesController extends Controller
 {
@@ -37,8 +40,20 @@ class ImagesController extends Controller
      */
     public function store(Request $request)
     {
-       dd($request->media);
-    }
+        if ($request->hasFile('image')){
+                $filename= $request->image->getClientOriginalName();
+                $request->image->storeAs('images', $filename, 'public');
+            $data['user_id'] = Auth::user()->id;
+        $data['image'] = $filename;
+       
+        images::create($data);
+        return back();
+
+        }
+     
+        
+ }
+    
 
 
 // Routing

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-<form  action="/routing" method="post" enctype="multipart/form-data" >
+<form  action="/upload" method="post" enctype="multipart/form-data" >
 @csrf
 <div class="row">
 <div class="col-md-6 mb-3">

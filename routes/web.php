@@ -20,6 +20,6 @@ Route::get('/', function () {
 Route::get('/image', 'ImagesController@index');
 
 Auth::routes();
-
+Route::post('/upload', 'ImagesController@store');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::post('/routing', 'ImagesController@routing');

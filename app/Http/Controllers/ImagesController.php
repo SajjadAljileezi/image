@@ -29,6 +29,22 @@ class ImagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    public function greyscales( Request $request)
+    {
+        
+        $img=$request->image;
+        return $img;
+        
+    //  $img = Image::make('home.jpg')->greyscale();
+
+    // return $img->response('jpg');
+    }
+
+
+
+
     public function create()
     {
         //
@@ -55,8 +71,6 @@ class ImagesController extends Controller
         return back();
 
         }
-
-
 
  }
 

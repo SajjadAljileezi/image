@@ -23,3 +23,4 @@ Auth::routes();
 Route::post('/upload', 'ImagesController@store');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::post('/routing', 'ImagesController@routing');
+Route::get('/printing', 'ImagesController@printing');

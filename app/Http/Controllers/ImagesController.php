@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use Image;
+use Carbon\Carbon;
 use App\images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -42,32 +44,38 @@ class ImagesController extends Controller
     {
         if ($request->hasFile('image')){
                 $filename= $request->image->getClientOriginalName();
-                $request->image->storeAs('images', $filename, 'public');
+                $imaged = time().'_'.$filename;
+                $userid= Auth::user()->id;
+                // $path = storage_path( $userid .'/'. $imaged);
+                $request->image->storeAs($userid,$imaged, 'public');
             $data['user_id'] = Auth::user()->id;
-        $data['image'] = $filename;
-       
+        $data['image'] = $userid.'/'.$imaged;
+
         images::create($data);
         return back();
 
         }
-     
-        
+
+
+
  }
-    
+
 
 
 // Routing
-public function routing(Request $request)
+public function printing(Request $request)
 {
-$media= $request->media;
+    $userid= Auth::user()->id;
+    $getImage= Images::where('user_id',$userid)->get('image');
+    if( ($getImage->count() > 0 )){
+ return view('printing',[ 'getImage' => $getImage]);
+}else {
+return back();
+}
 
-if ($media =="Printing"){
-  return view('printing');
 
 }
-else{
-    return back();
-}}
+
 
 
     /**

@@ -5,6 +5,7 @@ use Image;
 use Carbon\Carbon;
 use App\images;
 use Illuminate\Http\Request;
+use Storage;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -33,14 +34,18 @@ class ImagesController extends Controller
 
     public function greyscales( Request $request)
     {
-        
-        $img=$request->image;
-        return $img;
-        
-    //  $img = Image::make('home.jpg')->greyscale();
-
-    // return $img->response('jpg');
-    }
+        $img=$request->images;
+        // return response($img, 200);
+         $trans=  Storage::get($img);
+        //    return $img;
+        //  return $trans->response('jpg');
+        // $img=$request->image;
+        // return json( 'success');
+        $userid= Auth::user()->id;
+        $imges = Image::make($trans->getRealPath())->greyscale()->save('public');
+            // $imges=Storage::putFileAs( $imges, $img, 'public');
+        return $imges->response('jpg');
+     }
 
 
 
